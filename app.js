@@ -1,8 +1,21 @@
 const url = require('url');
+const fs = require('fs');
+
+function renderHTML(path, response){
+    fs.readFile(path, null, function(error,data){
+        if (error){
+            res.writeHead(404)
+        } else {
+        res.write(data);
+        }
+        res.end();
+    });
+}
+
 
 module.exports = {
     handleRequest : function(request, response){
-        response.writeHead(200,{'Content-Type':'txt/html'});
+        response.writeHead(200,{'Content-Type':'text/html'});
 
         var path = url.parse(request.url).pathname;
 
